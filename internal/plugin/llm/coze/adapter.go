@@ -38,10 +38,26 @@ type API struct {
 }
 
 func (API) Match(ctx *gin.Context, model string) bool {
+	switch model {
+	case "gpt-3.5-turbo":
+		model = "coze/7372633086053482504-1716578081-2"
+		break
+	case "gpt-4o":
+		model = "coze/7372633086053482504-1716578081-2"
+		break
+	case "gpt-4":
+		model = "coze/7372646846499487751-1716578547-2"
+		break
+	case "gpt-4-turbo":
+		model = "coze/7372648254925930514-1716579154-2"
+		break
+	case "gemini-1.5-pro-lastest":
+		model = "coze/7372931363038625800-1716644517-2"
+		break
+	}
 	if Model == model {
 		return true
 	}
-
 	if strings.HasPrefix(model, "coze/") {
 		// coze/botId-version-scene
 		values := strings.Split(model[5:], "-")
@@ -149,6 +165,23 @@ func (API) Generation(ctx *gin.Context) {
 }
 
 func newOptions(proxies string, model string, pMessages []coze.Message) (options coze.Options) {
+	switch model {
+	case "gpt-3.5-turbo":
+		model = "coze/7372633086053482504-1716578081-2"
+		break
+	case "gpt-4o":
+		model = "coze/7372633086053482504-1716578081-2"
+		break
+	case "gpt-4":
+		model = "coze/7372646846499487751-1716578547-2"
+		break
+	case "gpt-4-turbo":
+		model = "coze/7372648254925930514-1716579154-2"
+		break
+	case "gemini-1.5-pro-lastest":
+		model = "coze/7372931363038625800-1716644517-2"
+		break
+	}
 	if strings.HasPrefix(model, "coze/") {
 		values := strings.Split(model[5:], "-")
 		if len(values) == 3 {
